@@ -18,15 +18,21 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
 	<distributionManagement>
 		<repository>
-			<id>libs-release-local</id>
-			<name>libs-release-local</name>
+			<id>release</id>
+			<name>releases</name>
 			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
-			<id>libs-snapshot-local</id>
-			<name>libs-snapshot-local</name>
+			<id>snapshot</id>
+			<name>snapshots</name>
 			<url>http://localhost:8081/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
@@ -37,12 +43,6 @@
 		<url>git@github.com:nandudemy/devops.git</url>
 		<tag>HEAD</tag>
 	</scm>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
