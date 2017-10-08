@@ -1,7 +1,7 @@
 node {
    def mvnHome
    stage('Prepare') {
-      git 'git@github.com:nandudemy/devops.git'
+      git url: 'git@github.com:nandudemy/devops.git', branch: 'develop'
       mvnHome = tool 'maven'
    }
    stage('Build') {
