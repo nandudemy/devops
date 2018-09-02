@@ -7,9 +7,6 @@ node {
   stage('Prepare') {
      git url: 'git@github.com:nandudemy/devops.git'
      mvnHome = tool 'maven'
-     pom = readMavenPom file: 'pom.xml'
-     artifactVersion = pom.version.replace("-SNAPSHOT", "")
-     tagVersion = 'v'+artifactVersion
   }
 
   stage('Build') {
@@ -72,6 +69,10 @@ node {
   }
 
   if(env.BRANCH_NAME ==~ /release.*/){
+    pom = readMavenPom file: 'pom.xml'
+    artifactVersion = pom.version.replace("-SNAPSHOT", "")
+    tagVersion = 'v'+artifactVersion
+    
     stage('Release Build And Upload Artifacts') {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' clean release:clean release:prepare release:perform"
