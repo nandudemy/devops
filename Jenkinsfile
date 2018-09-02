@@ -5,10 +5,13 @@ node {
   def tagVersion
 
   stage('Prepare') {
-     git url: 'git@github.com:nandudemy/devops.git'
      mvnHome = tool 'maven'
   }
-
+  
+  stage('Checkout') {
+     checkout scm
+  }
+  
   stage('Build') {
      if (isUnix()) {
         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
