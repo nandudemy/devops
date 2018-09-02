@@ -76,32 +76,12 @@ node {
     artifactVersion = pom.version.replace("-SNAPSHOT", "")
     tagVersion = 'v'+artifactVersion
     
-    stage('Release Build And Upload Artifacts') {
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' clean release:clean release:prepare release:perform"
-      } else {
-         bat(/"${mvnHome}\bin\mvn" clean release:clean release:prepare release:perform/)
-      }
-    }
-     stage('Deploy To Dev') {
-        sh 'curl -u jenkins:jenkins -T target/**.war "http://localhost:8080/manager/text/deploy?path=/devops&update=true"'
-     }
-
-     stage("Smoke Test Dev"){
-         sh "curl --retry-delay 10 --retry 5 http://localhost:8080/devops"
-     }
-
-     stage("QA Approval"){
-         echo "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) is waiting for input. Please go to ${env.BUILD_URL}."
-         input 'Approval for QA Deploy?';
-     }
 
      stage("Deploy from Tag to QA"){
-        def downloadVersion = 
-        echo "${tagVersion}"
-        echo "Deploying war from http://localhost:8081/artifactory/libs-release-local/com/example/devops/${artifactVersion}/devops-${artifactVersion}.war"
-        sh curl -O http://localhost:8081/artifactory/libs-release-local/com/example/devops//${artifactVersion}/devops-/${artifactVersion}.war
-        sh 'curl -u jenkins:jenkins -T *.war "http://localhost:7080/manager/text/deploy?path=/devops&update=true"'
+       echo "${tagVersion} with artifact version ${artifactVersion}"
+       echo "Deploying war from http://localhost:8081/artifactory/libs-release-local/com/example/devops/${artifactVersion}/devops-${artifactVersion}.war"
+       sh curl -O http://localhost:8081/artifactory/libs-release-local/com/example/devops//${artifactVersion}/devops-/${artifactVersion}.war
+       sh 'curl -u jenkins:jenkins -T *.war "http://localhost:7080/manager/text/deploy?path=/devops&update=true"'
 
      }
 
