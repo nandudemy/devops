@@ -6,9 +6,6 @@ node {
 
   stage('Prepare') {
     mvnHome = tool 'maven'
-    pom = readMavenPom file: 'pom.xml'
-    artifactVersion = pom.version.replace("-SNAPSHOT", "")
-    tagVersion = 'v'+artifactVersion
   }
   
   stage('Checkout') {
@@ -75,6 +72,9 @@ node {
   }
 
   if(env.BRANCH_NAME ==~ /release.*/){
+    pom = readMavenPom file: 'pom.xml'
+    artifactVersion = pom.version.replace("-SNAPSHOT", "")
+    tagVersion = 'v'+artifactVersion
     
     stage('Release Build And Upload Artifacts') {
       if (isUnix()) {
@@ -97,9 +97,10 @@ node {
      }
 
      stage("Deploy from Tag to QA"){
+        def downloadVersion = 
         echo "${tagVersion}"
         echo "Deploying war from http://localhost:8081/artifactory/libs-release-local/com/example/devops/${artifactVersion}/devops-${artifactVersion}.war"
-        sh 'curl -O "http://localhost:8081/artifactory/libs-release-local/com/example/devops/${artifactVersion}/devops-${artifactVersion}.war"'
+        sh curl -O http://localhost:8081/artifactory/libs-release-local/com/example/devops//${artifactVersion}/devops-/${artifactVersion}.war
         sh 'curl -u jenkins:jenkins -T *.war "http://localhost:7080/manager/text/deploy?path=/devops&update=true"'
 
      }
