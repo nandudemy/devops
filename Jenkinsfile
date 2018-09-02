@@ -5,7 +5,7 @@ node {
   def tagVersion
 
   stage('Prepare') {
-     git url: 'git@github.com:nandudemy/devops.git'
+     git url: 'git@github.com:nandudemy/devops.git', branch: "${branch}"
      mvnHome = tool 'maven'
   }
 
