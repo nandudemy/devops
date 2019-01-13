@@ -98,7 +98,7 @@ node {
      }
 
      stage("Deploy from Artifactory to QA"){
-       retrieveArtifact = 'http://localhost:8081/artifactory/libs-release-local/com/example/devops/' + artifactVersion + 'devops-' + artifactVersion + '.war'
+       retrieveArtifact = 'http://localhost:8081/artifactory/libs-release-local/com/example/devops/' + artifactVersion + '/devops-' + artifactVersion + '.war'
        echo "${tagVersion} with artifact version ${artifactVersion}"
        echo "Deploying war from http://localhost:8081/artifactory/libs-release-local/com/example/devops/${artifactVersion}/devops-${artifactVersion}.war"
        sh 'curl -O ' + retrieveArtifact
