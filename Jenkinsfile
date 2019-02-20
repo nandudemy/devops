@@ -8,7 +8,7 @@ node {
     def retrieveArtifact
 
     stage('Prepare') {
-      mvnHome = tool 'maven'
+      mvnHome = tool 'mvn'
     }
 
     stage('Checkout') {
@@ -65,11 +65,11 @@ node {
         }
 
         stage('Deploy') {
-           sh 'curl -u jenkins:jenkins -T target/**.war "http://localhost:8080/manager/text/deploy?path=/devops&update=true"'
+           sh 'curl -u jenkins:jenkins -T target/**.war "http://localhost:7080/manager/text/deploy?path=/devops&update=true"'
         }
 
         stage("Smoke Test"){
-           sh "curl --retry-delay 10 --retry 5 http://localhost:8080/devops"
+           sh "curl --retry-delay 10 --retry 5 http://localhost:7080/devops"
         }
 
       }
@@ -87,11 +87,11 @@ node {
           }
         }
          stage('Deploy To Dev') {
-            sh 'curl -u jenkins:jenkins -T target/**.war "http://localhost:8080/manager/text/deploy?path=/devops&update=true"'
+            sh 'curl -u jenkins:jenkins -T target/**.war "http://localhost:9080/manager/text/deploy?path=/devops&update=true"'
          }
 
          stage("Smoke Test Dev"){
-             sh "curl --retry-delay 10 --retry 5 http://localhost:8080/devops"
+             sh "curl --retry-delay 10 --retry 5 http://localhost:9080/devops"
          }
 
          stage("QA Approval"){
