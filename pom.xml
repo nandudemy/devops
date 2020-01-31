@@ -25,18 +25,18 @@
 		<jacoco.version>0.7.9</jacoco.version>
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<id>release</id>
-			<name>releases</name>
-			<url>http://localhost:8081/artifactory/libs-release-local</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshot</id>
-			<name>snapshots</name>
-			<url>http://localhost:8081/artifactory/libs-snapshot-local</url>
-		</snapshotRepository>
-	</distributionManagement>
+	 <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>JenkinsVM-releases</name>
+        <url>http://52.250.55.110:8081/artifactory/libs-release-local</url>
+    </repository>
+   <snapshotRepository>
+        <id>snapshots</id>
+        <name>JenkinsVM-snapshots</name>
+        <url>http://52.250.55.110:8081/artifactory/libs-snapshot-local</url>
+    </snapshotRepository>
+  </distributionManagement>
 
 	<scm>
 		<connection>scm:git:git@github.com:nandudemy/devops.git</connection>
