@@ -1,4 +1,5 @@
 
+
 properties([pipelineTriggers([githubPush()])])
 node {
   def mvnHome
@@ -25,3 +26,5 @@ node {
    
   
   }
+
+
