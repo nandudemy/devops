@@ -4,7 +4,6 @@ properties([pipelineTriggers([githubPush()])])
 node {
   def mvnHome
   def pom
-  def artifactVersion
   def tagVersion
  
 
