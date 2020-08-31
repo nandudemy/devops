@@ -1,6 +1,5 @@
 
 
-
 node {
   def mvnHome
   def pom
