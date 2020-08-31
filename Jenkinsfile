@@ -1,6 +1,6 @@
 
 
-properties([pipelineTriggers([githubPush()])])
+
 node {
   def mvnHome
   def pom
