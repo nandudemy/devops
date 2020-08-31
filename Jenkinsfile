@@ -5,7 +5,7 @@ node {
   def pom
   def artifactVersion
   def tagVersion
-  def retrieveArtifact
+ 
 
   stage('Prepare') {
     mvnHome = tool 'maven'
